@@ -1,4 +1,4 @@
-Pearls
-======
+Mentalist
+=========
 
-A simple learning system for Berg's Little Printer.
+A simple, Django based learning system for Berg's Little Printer.
