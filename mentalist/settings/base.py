@@ -1,43 +1,126 @@
-"""
-Django settings for mentalist project.
+"""Common settings and globals."""
 
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
+from pathlib import Path
 
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
-"""
+# ──┤ PATH CONFIGURATION ├────────────────────────────────────────────────────┐
+# Absolute filesystem path to the Django project directory
+DJANGO_ROOT = Path(__file__, '..').resolve()
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+# Absolute filesystem path to the top-level project directory
+SITE_ROOT = DJANGO_ROOT.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't+eer&m3)ih&lp21c^y2czy96j-h(vro4)zh+81%v_*@%*l3)a'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
+# Site name
+SITE_NAME = str(DJANGO_ROOT.name)
+# ────────────────────────────────────────────────────────────────────────────┘
 
 
-# Application definition
+# ──┤ DEBUG CONFIGURATION ├───────────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#debug
+DEBUG = False
 
-INSTALLED_APPS = (
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+# See: http://serk.io/ref/settings/#template-debug
+TEMPLATE_DEBUG = DEBUG
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ MANAGER CONFIGURATION ├─────────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#admins
+ADMINS = (
+    ('Matt Deacalion Stevens', 'matt@dirtymonkey.co.uk'),
 )
 
+# See: http://serk.io/ref/settings/#managers
+MANAGERS = ADMINS
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ DATABASE CONFIGURATION ├────────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': str(SITE_ROOT / 'db.sqlite3'),
+    }
+}
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ GENERAL CONFIGURATION ├─────────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#time-zone
+TIME_ZONE = 'Europe/London'
+
+# See: http://serk.io/ref/settings/#language-code
+LANGUAGE_CODE = 'en-gb'
+
+# See: http://serk.io/ref/settings/#use-i18n
+USE_I18N = True
+
+# See: http://serk.io/ref/settings/#use-l10n
+USE_L10N = True
+
+# See: http://serk.io/ref/settings/#use-tz
+USE_TZ = True
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ MEDIA CONFIGURATION ├───────────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#media-root
+MEDIA_ROOT = str(SITE_ROOT / 'media')
+
+# See: http://serk.io/ref/settings/#media-url
+MEDIA_URL = '/media/'
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ STATIC FILE CONFIGURATION ├─────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#static-root
+STATIC_ROOT = str(SITE_ROOT / 'assets')
+
+# See: http://serk.io/ref/settings/#static-url
+STATIC_URL = '/static/'
+
+# See: http://serk.io/ref/settings/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = (
+    str(SITE_ROOT / 'static'),
+)
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ SECRET CONFIGURATION ├──────────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#secret-key
+# Note: only used for development and testing
+SECRET_KEY = 'glow in the dark body paint...'
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ SITE CONFIGURATION ├────────────────────────────────────────────────────┐
+# See https://serk.io/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = []
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ TEMPLATE CONFIGURATION ├────────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#template-context-processors
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
+
+# See: http://serk.io/ref/settings/#template-dirs
+TEMPLATE_DIRS = (
+    str(SITE_ROOT / 'templates'),
+)
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ MIDDLEWARE CONFIGURATION ├──────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#middleware-classes
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -47,37 +130,39 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+# ────────────────────────────────────────────────────────────────────────────┘
 
-ROOT_URLCONF = 'urls'
 
+# ──┤ URL and SSL CONFIGURATION ├─────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#root-urlconf
+ROOT_URLCONF = 'apps.core.urls'
+
+# Let Django know what to use to flag a connection as secure
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_SCHEME', 'https')
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ APP CONFIGURATION ├─────────────────────────────────────────────────────┐
+DJANGO_APPS = (
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+)
+
+# Apps specific for this project go here
+LOCAL_APPS = (
+    'apps.core',
+)
+
+# See: http://serk.io/ref/settings/#installed-apps
+INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
+# ──┤ WSGI CONFIGURATION ├────────────────────────────────────────────────────┐
+# See: http://serk.io/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
-
-STATIC_URL = '/static/'
+# ────────────────────────────────────────────────────────────────────────────┘
