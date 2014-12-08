@@ -150,6 +150,7 @@ DJANGO_APPS = (
 # Apps specific for this project go here
 LOCAL_APPS = (
     'apps.core',
+    'django_extensions',
 )
 
 # See: http://serk.io/ref/settings/#installed-apps
