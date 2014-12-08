@@ -78,11 +78,6 @@ STATIC_ROOT = str(SITE_ROOT / 'assets')
 
 # See: http://serk.io/ref/settings/#static-url
 STATIC_URL = '/static/'
-
-# See: http://serk.io/ref/settings/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = (
-    str(SITE_ROOT / 'static'),
-)
 # ────────────────────────────────────────────────────────────────────────────┘
 
 
