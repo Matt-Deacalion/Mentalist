@@ -1,11 +1,13 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+from model_utils import Choices
 
 
 class LittlePrinter(models.Model):
     """
     A physical Little Printer.
     """
-    pass
+    name = models.CharField(max_length=50)
 
 
 class Pearl(models.Model):
@@ -15,7 +17,7 @@ class Pearl(models.Model):
     does not have to be the thing being memorised, it could be a trigger or
     anything that causes concious effort to be applied to the information.
 
-    This entity could be any of the following:
+    This entity could be any of the following in nature:
 
         + Question
         + Task
@@ -23,7 +25,19 @@ class Pearl(models.Model):
         + Definition
         + Image
     """
-    pass
+    STATUS = Choices(
+        ('question', _('question')),
+        ('task', _('task')),
+        ('fact', _('fact')),
+        ('definition', _('definition')),
+        ('image', _('image')),
+    )
+
+    status = models.CharField(choices=STATUS, default=STATUS.question, max_length=20)
+    text = models.CharField(max_length=500, blank=True)
+    answer = models.CharField(max_length=100, blank=True)
+    image = models.ImageField(upload_to='images', blank=True)
+    minutes = models.IntegerField(default=1)
 
 
 class Iteration(models.Model):
@@ -31,11 +45,7 @@ class Iteration(models.Model):
     An iteration of an instance of a `Pearl`. There are six of these for every
     instance.
     """
-    pass
-
-
-class Delivery(models.Model):
-    """
-    An actual delivery that is sent to a specific Little Printer.
-    """
-    pass
+    user = models.ForeignKey('auth.User')
+    pearl = models.ForeignKey('Pearl')
+    date = models.DateField()
+    iteration = models.IntegerField()
