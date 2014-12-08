@@ -2,4 +2,5 @@
 -r base.txt
 
 flake8==2.2.5
+isort==3.9.0
 pytest==2.6.4
