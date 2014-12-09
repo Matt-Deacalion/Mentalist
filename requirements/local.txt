@@ -3,4 +3,5 @@
 
 flake8==2.2.5
 isort==3.9.0
+pudb==2014.1
 pytest==2.6.4
