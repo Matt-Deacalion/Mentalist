@@ -1,6 +1,7 @@
 Django==1.7.1
 Pillow==2.6.1
-django-model-utils==2.2
+django-debug-toolbar==1.2.2
 django-extensions==1.4.8
+django-model-utils==2.2
 invoke==0.9.0
 psycopg2==2.5.4

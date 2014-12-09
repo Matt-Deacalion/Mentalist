@@ -151,6 +151,7 @@ DJANGO_APPS = (
 LOCAL_APPS = (
     'apps.core',
     'django_extensions',
+    'debug_toolbar',
 )
 
 # See: http://serk.io/ref/settings/#installed-apps
