@@ -1,5 +1,69 @@
 body {
+    font-family: 'Museo Slab';
+    background: #fff;
+    color: #000;
     width: 384px;
     margin: 0;
     padding: 20px 0;
+}
+
+h1 {
+    background: #000;
+    text-transform: uppercase;
+    color: #fff;
+    padding: 0.5em 1em;
+    font-weight: bolder;
+}
+
+hr {
+    height: 1px;
+    background-color: #000;
+}
+
+h1 span {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.time span {
+    display: block;
+    float: right;
+}
+
+.iterations {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.iterations li {
+    width: 18px;
+    height: 10px;
+    border: 1px solid #000;
+    display: inline-block;
+    border-radius: 50px;
+    margin: 0.1em;
+}
+
+.iterations li.complete {
+    background-color: #000;
+}
+
+ul.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.list > li {
+    margin-top: 2em;
+}
+
+ul.list > li > p {
+    margin: 0;
+}
+
+ul.list > li:first-child {
+    margin-top: 0;
 }
