@@ -16,27 +16,20 @@
         <hr>
 
         <ul class="list">
-            <li>
-                <p>What is the capital city of Afghanistan?</p>
-                <ul class="iterations">
-                    <li class="complete"></li>
-                    <li class="complete"></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </li>
-
-            <li>
-                <p>What is the goal of the Feynman technique?</p>
-                <ul class="iterations">
-                    <li class="complete"></li>
-                    <li class="complete"></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
-            </li>
+            {% for iteration in iteration_list %}
+                <li>
+                    <p>{{ iteration.pearl.text }}</p>
+                    <ul class="iterations">
+                        <li{% if iteration.iteration == 1 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration == 2 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration == 3 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration == 4 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration == 5 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration == 6 %} class="complete"{% endif %}></li>
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
 
         <hr>
 
