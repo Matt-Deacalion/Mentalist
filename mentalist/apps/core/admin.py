@@ -10,11 +10,12 @@ admin.site.register(LittlePrinter, LittlePrinterAdmin)
 
 
 class PearlAdmin(admin.ModelAdmin):
-    list_display = ('id', 'status', 'text', 'answer', 'image', 'minutes')
+    list_display = ('__str__', 'status', 'answer', 'image', 'minutes')
+    list_filter = ('status',)
 admin.site.register(Pearl, PearlAdmin)
 
 
 class IterationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'pearl', 'date', 'iteration')
-    list_filter = ('user', 'pearl', 'date')
+    list_display = ('pearl', 'user', 'date', 'iteration')
+    list_filter = ('user', 'date', 'iteration')
 admin.site.register(Iteration, IterationAdmin)
