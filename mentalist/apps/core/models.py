@@ -9,6 +9,9 @@ class LittlePrinter(models.Model):
     """
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Pearl(models.Model):
     """
@@ -39,6 +42,9 @@ class Pearl(models.Model):
     image = models.ImageField(upload_to='images', blank=True)
     minutes = models.IntegerField(default=1)
 
+    def __str__(self):
+        return self.text[:35] + (self.text[35:] and '…')
+
 
 class Iteration(models.Model):
     """
@@ -49,3 +55,11 @@ class Iteration(models.Model):
     pearl = models.ForeignKey('Pearl')
     date = models.DateField()
     iteration = models.IntegerField()
+
+    def __str__(self):
+        return '{}, {}, #{}: {}'.format(
+            self.user,
+            self.date,
+            self.iteration,
+            self.pearl,
+        )
