@@ -9,9 +9,9 @@
         <script>try{Typekit.load();}catch(e){}</script>
     </head>
     <body class="tk-museo-slab">
-        <h1>Mentalist<span>Monday, 1<sup>st</sup> December 2014 </span></h1>
+        <h1>Mentalist<span>{{ day|date:"l" }}, {{ day.day }}<sup>{{ day|date:"S"}}</sup> {{ day|date:"F Y" }}</span></h1>
 
-        <p class="time">estimated completion time:<span>2 minutes</span></p>
+        <p class="time">estimated completion time:<span>{{ total_time }}</span></p>
 
         <hr>
 
