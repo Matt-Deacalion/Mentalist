@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
+from requests_oauthlib import OAuth1Session
 
 
 class OAuth(models.Model):
@@ -30,6 +31,25 @@ class LittlePrinter(models.Model):
 
     def __str__(self):
         return self.name
+
+    def print(self, html):
+        """
+        Takes a string `html` and sends it to the Little Printer to be printed.
+        """
+        base_url = 'http://api.bergcloud.com/v1/subscriptions/{}/publish'
+
+        berg = OAuth1Session(
+            client_key=self.credentials.client_key,
+            client_secret=self.credentials.client_secret,
+            resource_owner_key=self.credentials.resource_owner_key,
+            resource_owner_secret=self.credentials.resource_owner_secret,
+        )
+
+        response = berg.post(
+            base_url.format(self.subscription_id),
+            html,
+            headers={'Content-Type': 'text/html; charset=utf-8'},
+        )
 
 
 class Pearl(models.Model):
