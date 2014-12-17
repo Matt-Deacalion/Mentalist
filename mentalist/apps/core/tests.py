@@ -195,3 +195,27 @@ class EditionContextTests(TestCase):
         response = TodayEditionView.as_view()(request, user=username)
 
         self.assertEqual(response.context_data['total_time'], '9 minutes')
+
+
+class ModelTests(TestCase):
+    """
+    Are models created correctly and do they behave the way they should?
+    """
+
+    def test_iteration_autocreate(self):
+        """
+        Are the six related `Iteration` instances automatically created when a
+        `Pearl` instance is newly created?
+        """
+        user = mommy.make('auth.User')
+        pearl = mommy.make('core.Pearl', user=user)
+
+        iterations = Iteration.objects.filter(pearl=pearl).order_by('date')
+
+        self.assertEqual(len(iterations), 6)
+        self.assertEqual(iterations[0].date, date.today() + timedelta(1))
+        self.assertEqual(iterations[1].date, date.today() + timedelta(7))
+        self.assertEqual(iterations[2].date, date.today() + timedelta(14))
+        self.assertEqual(iterations[3].date, date.today() + timedelta(30))
+        self.assertEqual(iterations[4].date, date.today() + timedelta(90))
+        self.assertEqual(iterations[5].date, date.today() + timedelta(180))

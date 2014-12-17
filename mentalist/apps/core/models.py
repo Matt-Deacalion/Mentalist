@@ -1,4 +1,5 @@
 import requests
+from datetime import date, timedelta
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -109,6 +110,25 @@ class Pearl(models.Model):
 
     def __str__(self):
         return self.text[:35] + (self.text[35:] and '…')
+
+    def save(self, *args, **kwargs):
+        """
+        This has been overriden to automatically create the related
+        `Iteration` instances upon saving.
+        """
+        is_new = self.pk is None
+
+        super().save(*args, **kwargs)
+
+        if is_new:
+            dates = [date.today() + timedelta(i) for i in [1, 7, 14, 30, 90, 180]]
+
+            for i, interval_date in enumerate(dates):
+                Iteration.objects.create(
+                    pearl=self,
+                    date=interval_date,
+                    iteration=i + 1,
+                )
 
 
 class Iteration(models.Model):
