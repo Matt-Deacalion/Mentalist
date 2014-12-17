@@ -1,3 +1,6 @@
+import requests
+from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
@@ -45,7 +48,7 @@ class LittlePrinter(models.Model):
             resource_owner_secret=self.credentials.resource_owner_secret,
         )
 
-        response = berg.post(
+        berg.post(
             base_url.format(self.subscription_id),
             html,
             headers={'Content-Type': 'text/html; charset=utf-8'},
@@ -56,6 +59,22 @@ class LittlePrinter(models.Model):
         Sends a test page to the Little Printer.
         """
         self.print('<h1>Test print from the Mentalist project!</h1>')
+
+    def print_days_iteration(self, user, date):
+        """
+        Takes a `user` instance and a date then prints the user's iterations
+        for that day. The reason this goes via the entire stack is to avoid
+        repeating code, and to keep things separate.
+        """
+        url = reverse('edition_day', args=[
+            user.username, date.year, date.month, date.day,
+        ])
+
+        base_url = getattr(settings, 'BASE_URL')
+
+        response = requests.get(base_url + url)
+
+        self.print(response.content.decode())
 
 
 class Pearl(models.Model):
