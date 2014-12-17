@@ -35,7 +35,7 @@ class LittlePrinter(models.Model):
     def __str__(self):
         return self.name
 
-    def print(self, html):
+    def print_edition(self, html):
         """
         Takes a string `html` and sends it to the Little Printer to be printed.
         """
@@ -58,7 +58,7 @@ class LittlePrinter(models.Model):
         """
         Sends a test page to the Little Printer.
         """
-        self.print('<h1>Test print from the Mentalist project!</h1>')
+        self.print_edition('<h1>Test print from the Mentalist project!</h1>')
 
     def print_days_iteration(self, user, date):
         """
@@ -74,7 +74,7 @@ class LittlePrinter(models.Model):
 
         response = requests.get(base_url + url)
 
-        self.print(response.content.decode())
+        self.print_edition(response.content.decode())
 
 
 class Pearl(models.Model):
