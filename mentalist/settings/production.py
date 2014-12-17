@@ -25,6 +25,11 @@ ALLOWED_HOSTS = ['*', ]
 # ────────────────────────────────────────────────────────────────────────────┘
 
 
+# ──┤ BASE URL ├──────────────────────────────────────────────────────────────┐
+BASE_URL = 'http://berg.dirtymonkey.co.uk'
+# ────────────────────────────────────────────────────────────────────────────┘
+
+
 # ──┤ EMAIL CONFIGURATION ├───────────────────────────────────────────────────┐
 # See: http://serk.io/ref/settings/#email-backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
