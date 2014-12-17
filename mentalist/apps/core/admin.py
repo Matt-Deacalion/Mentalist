@@ -17,7 +17,8 @@ admin.site.register(OAuth, OAuthAdmin)
 
 
 class LittlePrinterAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name')
+    list_display = ('id', 'name', 'subscription_id', 'credentials')
+    list_filter = ('credentials',)
     search_fields = ('name',)
 admin.site.register(LittlePrinter, LittlePrinterAdmin)
 

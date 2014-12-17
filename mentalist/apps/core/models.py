@@ -25,6 +25,8 @@ class LittlePrinter(models.Model):
     A physical Little Printer.
     """
     name = models.CharField(max_length=50)
+    subscription_id = models.CharField(max_length=50)
+    credentials = models.ForeignKey('OAuth')
 
     def __str__(self):
         return self.name
