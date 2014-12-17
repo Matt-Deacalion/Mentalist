@@ -100,6 +100,7 @@ class Pearl(models.Model):
         ('image', _('image')),
     )
 
+    user = models.ForeignKey('auth.User')
     status = models.CharField(choices=STATUS, default=STATUS.question, max_length=20)
     text = models.CharField(max_length=500, blank=True)
     answer = models.CharField(max_length=100, blank=True)
@@ -115,14 +116,13 @@ class Iteration(models.Model):
     An iteration of an instance of a `Pearl`. There are six of these for every
     instance.
     """
-    user = models.ForeignKey('auth.User')
     pearl = models.ForeignKey('Pearl')
     date = models.DateField()
     iteration = models.IntegerField()
 
     def __str__(self):
         return '{}, {}, #{}: {}'.format(
-            self.user,
+            self.pearl.user,
             self.date,
             self.iteration,
             self.pearl,

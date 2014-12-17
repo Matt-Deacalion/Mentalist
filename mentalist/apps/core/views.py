@@ -18,7 +18,7 @@ class EditionView(object):
         Retrieve only the `iterations` that belong to a specific user.
         """
         user = self.kwargs.get('user')
-        return super().get_queryset().filter(user__username=user)
+        return super().get_queryset().filter(pearl__user__username=user)
 
     def get_context_data(self, **kwargs):
         """

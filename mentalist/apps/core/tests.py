@@ -59,8 +59,11 @@ class EditionContextTests(TestCase):
         Iterations exist for other users, but not for `Ewa`. Return a 404 if
         the user has no iterations.
         """
-        mommy.make('core.Iteration', date=date.today(), user=self.becia)
-        mommy.make('core.Iteration', date=date.today(), user=self.matt)
+        pearl = mommy.make('core.Pearl', user=self.becia)
+        mommy.make('core.Iteration', date=date.today(), pearl=pearl)
+
+        pearl = mommy.make('core.Pearl', user=self.matt)
+        mommy.make('core.Iteration', date=date.today(), pearl=pearl)
 
         with self.assertRaises(Http404):
             username = self.ewa.username
@@ -76,16 +79,16 @@ class EditionContextTests(TestCase):
         user = self.matt
         username = self.matt.username
 
-        # Iterations for today. These `should` show.
+        pearl = mommy.make('core.Pearl', user=user)
+
+        # Iterations for today. This `should` show.
         iterations = [
-            mommy.make('core.Iteration', date=date.today(), user=user),
-            mommy.make('core.Iteration', date=date.today(), user=user),
-            mommy.make('core.Iteration', date=date.today(), user=user),
+            mommy.make('core.Iteration', date=date.today(), pearl=pearl),
         ]
 
         # Iterations in the past and future. These should `not` show.
-        mommy.make('core.Iteration', date=date.today()-timedelta(5), user=user)
-        mommy.make('core.Iteration', date=date.today()+timedelta(5), user=user)
+        mommy.make('core.Iteration', date=date.today()-timedelta(5), pearl=pearl)
+        mommy.make('core.Iteration', date=date.today()+timedelta(5), pearl=pearl)
 
         url = reverse('edition_today', args=[username])
         request = self.factory.get(url)
@@ -105,12 +108,14 @@ class EditionContextTests(TestCase):
         username = self.matt.username
         future_date = date.today() + timedelta(5)
 
+        pearl = mommy.make('core.Pearl', user=user)
+
         # Iteration on a future date. This `should` show.
-        mommy.make('core.Iteration', date=future_date, user=user)
+        mommy.make('core.Iteration', date=future_date, pearl=pearl)
 
         # Iterations for today and in the past. These should `not` show.
-        mommy.make('core.Iteration', date=date.today(), user=user)
-        mommy.make('core.Iteration', date=date.today()-timedelta(5), user=user)
+        mommy.make('core.Iteration', date=date.today(), pearl=pearl)
+        mommy.make('core.Iteration', date=date.today()-timedelta(5), pearl=pearl)
 
         url = reverse('edition_day', args=[
             username,
@@ -142,12 +147,14 @@ class EditionContextTests(TestCase):
         username = self.matt.username
         past_date = date.today() - timedelta(5)
 
+        pearl = mommy.make('core.Pearl', user=user)
+
         # Iteration on a past date. This `should` show.
-        mommy.make('core.Iteration', date=past_date, user=user)
+        mommy.make('core.Iteration', date=past_date, pearl=pearl)
 
         # Iterations for today and in the future. These should `not` show.
-        mommy.make('core.Iteration', date=date.today(), user=user)
-        mommy.make('core.Iteration', date=date.today()+timedelta(5), user=user)
+        mommy.make('core.Iteration', date=date.today(), pearl=pearl)
+        mommy.make('core.Iteration', date=date.today()+timedelta(5), pearl=pearl)
 
         url = reverse('edition_day', args=[
             username,
@@ -178,10 +185,10 @@ class EditionContextTests(TestCase):
         user = self.matt
         username = self.matt.username
 
-        pearl = mommy.make('core.Pearl', minutes=3)
-        mommy.make('core.Iteration', date=date.today(), user=user, pearl=pearl)
-        mommy.make('core.Iteration', date=date.today(), user=user, pearl=pearl)
-        mommy.make('core.Iteration', date=date.today(), user=user, pearl=pearl)
+        pearl = mommy.make('core.Pearl', minutes=3, user=user)
+        mommy.make('core.Iteration', date=date.today(), pearl=pearl)
+        mommy.make('core.Iteration', date=date.today(), pearl=pearl)
+        mommy.make('core.Iteration', date=date.today(), pearl=pearl)
 
         url = reverse('edition_today', args=[username])
         request = self.factory.get(url)
