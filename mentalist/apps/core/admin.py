@@ -1,6 +1,19 @@
 from django.contrib import admin
 
-from .models import LittlePrinter, Pearl, Iteration
+from .models import OAuth, LittlePrinter, Pearl, Iteration
+
+
+class OAuthAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'name',
+        'client_key',
+        'client_secret',
+        'resource_owner_key',
+        'resource_owner_secret',
+    )
+    search_fields = ('name',)
+admin.site.register(OAuth, OAuthAdmin)
 
 
 class LittlePrinterAdmin(admin.ModelAdmin):

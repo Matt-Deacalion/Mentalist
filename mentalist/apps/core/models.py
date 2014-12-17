@@ -3,6 +3,23 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
 
 
+class OAuth(models.Model):
+    """
+    Client and token credentials for 2-Legged OAuth 1.0 request.
+    """
+    name = models.CharField(max_length=50)
+    client_key = models.CharField(max_length=50)
+    client_secret = models.CharField(max_length=50)
+    resource_owner_key = models.CharField(max_length=50)
+    resource_owner_secret = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = 'OAuths'
+
+    def __str__(self):
+        return self.name
+
+
 class LittlePrinter(models.Model):
     """
     A physical Little Printer.
