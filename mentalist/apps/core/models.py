@@ -51,6 +51,12 @@ class LittlePrinter(models.Model):
             headers={'Content-Type': 'text/html; charset=utf-8'},
         )
 
+    def test_print(self):
+        """
+        Sends a test page to the Little Printer.
+        """
+        self.print('<h1>Test print from the Mentalist project!</h1>')
+
 
 class Pearl(models.Model):
     """
