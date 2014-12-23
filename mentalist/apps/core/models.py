@@ -103,7 +103,7 @@ class Pearl(models.Model):
 
     user = models.ForeignKey('auth.User')
     status = models.CharField(choices=STATUS, default=STATUS.question, max_length=20)
-    text = models.CharField(max_length=500, blank=True)
+    text = models.TextField(max_length=500, blank=True)
     answer = models.CharField(max_length=100, blank=True)
     image = models.ImageField(upload_to='images', blank=True)
     minutes = models.IntegerField(default=1)
