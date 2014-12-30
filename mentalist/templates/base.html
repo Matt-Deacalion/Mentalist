@@ -90,12 +90,12 @@
                 <li>
                     <p>{{ iteration.pearl.text }}</p>
                     <ul class="iterations">
-                        <li{% if iteration.iteration == 1 %} class="complete"{% endif %}></li>
-                        <li{% if iteration.iteration == 2 %} class="complete"{% endif %}></li>
-                        <li{% if iteration.iteration == 3 %} class="complete"{% endif %}></li>
-                        <li{% if iteration.iteration == 4 %} class="complete"{% endif %}></li>
-                        <li{% if iteration.iteration == 5 %} class="complete"{% endif %}></li>
-                        <li{% if iteration.iteration == 6 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration >= 1 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration >= 2 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration >= 3 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration >= 4 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration >= 5 %} class="complete"{% endif %}></li>
+                        <li{% if iteration.iteration >= 6 %} class="complete"{% endif %}></li>
                     </ul>
                 </li>
             {% endfor %}

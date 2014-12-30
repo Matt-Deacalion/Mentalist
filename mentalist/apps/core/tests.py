@@ -196,6 +196,26 @@ class EditionContextTests(TestCase):
 
         self.assertEqual(response.context_data['total_time'], '9 minutes')
 
+    def test_iteration_markers(self):
+        """
+        Regression test to make sure iteration markers are highlighted all the
+        way up to the current iteration, and not just the current iteration.
+        """
+        username = self.matt.username
+
+        pearl = mommy.make('core.Pearl', user=self.matt)
+        mommy.make(
+            'core.Iteration',
+            date=date.today(),
+            pearl=pearl,
+            iteration=2,
+        )
+
+        request = self.factory.get(reverse('edition_today', args=[username]))
+        response = TodayEditionView.as_view()(request, user=username)
+
+        self.assertContains(response, '<li class="complete">', count=2)
+
 
 class ModelTests(TestCase):
     """
