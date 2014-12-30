@@ -1,11 +1,14 @@
 """Production settings and globals."""
 
 from os import environ
+
+from django.core.exceptions import ImproperlyConfigured
+
 from .base import *
+
 
 # Normally you should not import ANYTHING from Django directly
 # into your settings, but ImproperlyConfigured is an exception.
-from django.core.exceptions import ImproperlyConfigured
 
 
 def get_env_setting(setting):

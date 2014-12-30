@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import OAuth, LittlePrinter, Pearl, Iteration
+from .models import Iteration, LittlePrinter, OAuth, Pearl
 
 
 class OAuthAdmin(admin.ModelAdmin):
