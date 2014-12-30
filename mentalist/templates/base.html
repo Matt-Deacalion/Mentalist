@@ -27,6 +27,13 @@
                 background-color: #000;
             }
 
+            img {
+                width: 100%;
+                -webkit-filter: grayscale(100%);
+                -moz-filter: grayscale(100%);
+                filter: grayscale(100%);
+            }
+
             h1 span {
                 display: block;
                 font-weight: bold;
@@ -88,7 +95,12 @@
         <ul class="list">
             {% for iteration in iteration_list %}
                 <li>
+                    {% if iteration.pearl.image %}
+                    <img src="{{ iteration.pearl.image.url }}" />
+                    {% endif %}
+
                     <p>{{ iteration.pearl.text }}</p>
+
                     <ul class="iterations">
                         <li{% if iteration.iteration >= 1 %} class="complete"{% endif %}></li>
                         <li{% if iteration.iteration >= 2 %} class="complete"{% endif %}></li>
