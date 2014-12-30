@@ -96,7 +96,7 @@
             {% for iteration in iteration_list %}
                 <li>
                     {% if iteration.pearl.image %}
-                    <img src="{{ iteration.pearl.image.url }}" />
+                    <img class="dither" src="http://berg.dirtymonkey.co.uk/{{ iteration.pearl.image.url }}" />
                     {% endif %}
 
                     <p>{{ iteration.pearl.text }}</p>
