@@ -91,6 +91,7 @@ class Pearl(models.Model):
         + Question
         + Task
         + Fact
+        + Quote
         + Definition
         + Image
     """
@@ -98,6 +99,7 @@ class Pearl(models.Model):
         ('question', _('question')),
         ('task', _('task')),
         ('fact', _('fact')),
+        ('quote', _('quote')),
         ('definition', _('definition')),
         ('image', _('image')),
     )
